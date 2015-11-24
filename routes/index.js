@@ -14,14 +14,18 @@ var isAuthenticated = function (req, res, next) {
 module.exports = function(passport){
 	/* GET login page. */
 	router.get('/', function(req, res) {
-    // Display the Login page with any flash message, if any
+    // Display the Index page with any flash message, if any
 		res.render('index', { message: req.flash('message') });
 	});
 
+	/* GET Login Page */
+	router.get('/login', function(req, res){
+		res.render('login',{message: req.flash('message')});
+	});
 	/* POST Handle Login */
 	router.post('/login', passport.authenticate('login', {
 		successRedirect: '/home',
-		failureRedirect: '/',
+		failureRedirect: '/login',
 		failureFlash : true
 	}));
 
@@ -29,7 +33,6 @@ module.exports = function(passport){
 	router.get('/signup', function(req, res){
 		res.render('register',{message: req.flash('message')});
 	});
-
 	/* POST Handle Registration */
 	router.post('/signup', passport.authenticate('signup', {
 		successRedirect: '/home',
@@ -41,7 +44,6 @@ module.exports = function(passport){
 	router.get('/home', isAuthenticated, function(req, res){
 		res.render('home', { user: req.user });
 	});
-
 	/* GET Handle Logout */
 	router.get('/signout', function(req, res) {
 		req.logout();
