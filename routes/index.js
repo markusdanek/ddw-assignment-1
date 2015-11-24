@@ -41,7 +41,7 @@ module.exports = function(passport){
 		failureFlash : true
 	}));
 
-	router.get('/users', function(req, res) {
+	router.get('/users', isAuthenticated, function(req, res) {
 	  User.find(function(err, User){
 	    console.log(User);
 	    res.render('users',{title : 'User', User : User});
