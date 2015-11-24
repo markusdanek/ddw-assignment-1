@@ -1,4 +1,5 @@
 var express = require('express');
+var User = require('../models/user');
 var router = express.Router();
 
 var isAuthenticated = function (req, res, next) {
@@ -39,6 +40,13 @@ module.exports = function(passport){
 		failureRedirect: '/signup',
 		failureFlash : true
 	}));
+
+	router.get('/users', function(req, res) {
+	  User.find(function(err, User){
+	    console.log(User);
+	    res.render('users',{title : 'User', User : User});
+	  });
+	});
 
 	/* GET Home Page */
 	router.get('/home', isAuthenticated, function(req, res){
