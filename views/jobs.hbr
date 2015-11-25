@@ -1,0 +1,32 @@
+<div class="container" ng-controller="JobCtrl">
+  <h1>Job List App</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Action</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input class="form-control" ng-model="job.name">
+        </td>
+        <td>
+          <button class="btn btn-primary" ng-click="addJob()">Add Job</button>
+        </td>
+        <td>
+          <button class="btn btn-info" ng-click="update()">Update</button>
+          &nbsp;&nbsp;
+          <button class="btn btn-info" ng-click="deselect()">Clear</button>
+        </td>
+      </tr>
+      <tr ng-repeat="job in jobs">
+        <td>{{job.name}}</td>
+        <td><button class="btn btn-danger" ng-click="remove(job._id)">Remove</button></td>
+        <td><button class="btn btn-warning" ng-click="edit(job._id)">Edit</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

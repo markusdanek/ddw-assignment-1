@@ -39,8 +39,10 @@ initPassport(passport);
 
 var index = require('./routes/index')(passport);
 var users = require('./routes/users')(passport);
+var jobs = require('./routes/jobs')(passport);
 app.use('/', index);
 app.use('/', users);
+app.use('/', jobs);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -59,3 +61,4 @@ if (app.get('env') === 'development') {
 }
 
 module.exports = app;
+console.log("Server running on port 3000");
