@@ -6,21 +6,21 @@ var router = express.Router();
 module.exports = function(){
 
   // [GET] All Jobs
-  router.get('/jobs', function (req, res) {
+  router.get('/jobs', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
     Job.find(function (err, Job) {
       console.log(Job);
       res.render('jobs', {title : 'Jobs', Job : Job});
     });
   });
 
-  // // [POST] Insert Job
-  // router.post('/jobs', function (req, res) {
-  //   console.log(req.body);
-  //   Job.insert(req.body, function(err, doc) {
-  //     res.json(doc);
-  //   });
-  // });
-  //
+  // [POST] Insert Job
+  router.post('/jobs', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
+    console.log(req.body);
+    Job.insert(req.body, function(err, Job) {
+      res.render('jobs', {title : 'Jobs', Job : Job});
+    });
+  });
+
   // // [DELETE] Delte Job:ID
   // router.delete('/jobs/:id', function (req, res) {
   //   var id = req.params.id;

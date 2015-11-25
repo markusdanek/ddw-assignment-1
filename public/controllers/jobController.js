@@ -1,5 +1,3 @@
-var express = require("express");
-
 var app = angular.module('myApp', []);
 app.controller('JobCtrl', ['$scope', '$http', function($scope, $http) {
     console.log("Hello, this is controller");
