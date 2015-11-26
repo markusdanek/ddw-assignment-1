@@ -1,18 +1,19 @@
-var app = angular.module('myApp', []);
-app.controller('JobCtrl', ['$scope', '$http', function($scope, $http) {
-    console.log("Hello, this is controller");
+var myApp = angular.module('myApp', []);
+myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
+    console.log("Hello World from controller");
+
 
 var refresh = function() {
   $http.get('/jobs').success(function(response) {
-    console.log("Dafuq I got the data");
-    $scope.joblist = response;
+    console.log("I got the data I requested");
+    $scope.jobs = response;
     $scope.job = "";
   });
 };
 
 refresh();
 
-$scope.addJob = function() {
+$scope.addContact = function() {
   console.log($scope.job);
   $http.post('/jobs', $scope.job).success(function(response) {
     console.log(response);
@@ -36,7 +37,7 @@ $scope.edit = function(id) {
 
 $scope.update = function() {
   console.log($scope.job._id);
-  $http.put('/jobs/' + $scope.job._id, $scope.job).success(function(response) {
+  $http.put('/jobs/' + $scope.contact._id, $scope.job).success(function(response) {
     refresh();
   });
 };
