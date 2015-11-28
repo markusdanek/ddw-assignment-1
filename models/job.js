@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
-
+var mongojs = require('mongojs');
 // Definde Job Model
 module.exports = mongoose.model('jobs',{
-	_id: String,
 	name: String,
 	email: String,
-	number: String
+	number: String,
+	formFieldsId: mongoose.Schema.Types.ObjectId
 });

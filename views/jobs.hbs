@@ -1,0 +1,14 @@
+<div class="container">
+	<h2>All Users</h2>
+	{{#each Jobs}}
+	  <ul>
+			<li>Name: {{name}}</li>
+			<li>E-Mail: {{email}}</li>
+			<li>Number: {{number}}</li>
+			<li>
+				<a href="/jobs/{{_id}}">View Job</a>
+			</li>
+		</ul>
+	{{/each}}
+	<a href="/jobs/new">Create Job</a>
+</div>
