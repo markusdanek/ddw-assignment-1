@@ -41,8 +41,8 @@ var index = require('./routes/index')(passport);
 var users = require('./routes/users')(passport);
 var jobs = require('./routes/jobs')(passport);
 app.use('/', index);
-app.use('/', users);
-app.use('/', jobs);
+app.use('/app', users);
+app.use('/app', jobs);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

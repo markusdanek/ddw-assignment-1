@@ -8,7 +8,7 @@ module.exports = function(){
 
 
   // List jobs
-  router.get('/jobs', function (req, res) {
+  router.get('/jobs', connectEnsureLogin.ensureLoggedIn(),  function (req, res) {
     console.log('I received a GET request');
 
     Job.find(function (err, jobs) {
@@ -19,7 +19,7 @@ module.exports = function(){
 
 
   // Create new job form
-  router.get('/jobs/new', function (req, res) {
+  router.get('/jobs/new', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
     console.log('I received a GET request');
 
     res.render('job-single', {create: true});
@@ -27,18 +27,18 @@ module.exports = function(){
 
 
   // Insert new job
-  router.post('/jobs/', function (req, res) {
+  router.post('/jobs/', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
 
     var newJob = new Job( {name: req.body.name, email: req.body.email, number: req.body.number} );
 
     newJob.save( function (err, data) {
       if (err) { console.log(err); }
-      else { res.redirect('/jobs/') }
+      else { res.redirect('/app/jobs/') }
     });
   });
 
   // Delete job
-  router.get('/jobs/:id/delete', function (req, res) {
+  router.get('/jobs/:id/delete', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
     var id = req.params.id;
     console.log(id);
     Job.remove({_id: MongoDB.ObjectId(id)}, function (err, doc) {
@@ -47,7 +47,7 @@ module.exports = function(){
   });
 
   // List single job
-  router.get('/jobs/:id', function (req, res) {
+  router.get('/jobs/:id', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
     console.log('I received a GET request');
     var id = req.params.id;
     Job.findOne({_id: MongoDB.ObjectId(id)}, function (err, jobs) {
@@ -57,12 +57,12 @@ module.exports = function(){
   });
 
   // Edit single job
-  router.post('/jobs/:id', function (req, res) {
+  router.post('/jobs/:id', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
     var id = req.params.id;
 
     Job.findOneAndUpdate({_id: MongoDB.ObjectId(id)}, {name: req.body.name, email: req.body.email, number: req.body.number}, {upsert:true}, function(err, doc){
         if (err) return res.send(500, { error: err });
-        return res.redirect('/jobs/'+id);
+        return res.redirect('/app/jobs/'+id);
     });
 
   });
