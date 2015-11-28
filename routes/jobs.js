@@ -12,8 +12,8 @@ module.exports = function(){
     console.log('I received a GET request');
 
     Job.find(function (err, jobs) {
-      console.log(jobs);
-      res.render('jobs', {title : 'Users', Jobs : jobs});
+      if (err) return res.send(500, { error: err });
+      else res.render('jobs', {title : 'Users', Jobs : jobs});
     });
   });
 
@@ -32,8 +32,8 @@ module.exports = function(){
     var newJob = new Job( {name: req.body.name, email: req.body.email, number: req.body.number} );
 
     newJob.save( function (err, data) {
-      if (err) { console.log(err); }
-      else { res.redirect('/app/jobs/') }
+      if (err) return res.send(500, { error: err });
+      else { res.redirect('/app/jobs/'); }
     });
   });
 
@@ -42,7 +42,8 @@ module.exports = function(){
     var id = req.params.id;
     console.log(id);
     Job.remove({_id: MongoDB.ObjectId(id)}, function (err, doc) {
-      res.redirect('/jobs/');
+      if (err) return res.send(500, { error: err });
+      else { res.redirect('/app/jobs/'); }
     });
   });
 
@@ -51,8 +52,8 @@ module.exports = function(){
     console.log('I received a GET request');
     var id = req.params.id;
     Job.findOne({_id: MongoDB.ObjectId(id)}, function (err, jobs) {
-      console.log(jobs);
-      res.render('job-single', {title : 'Users', job : jobs, edit: true});
+      if (err) return res.send(500, { error: err });
+      else res.render('job-single', {title : 'Users', job : jobs, edit: true});
     });
   });
 
