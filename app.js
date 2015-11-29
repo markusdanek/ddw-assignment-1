@@ -37,6 +37,11 @@ app.use(flash());
 var initPassport = require('./passport/init');
 initPassport(passport);
 
+app.use(function (req, res, next) {
+  res.locals.login = req.isAuthenticated();
+  next();
+});
+
 var index = require('./routes/index')(passport);
 var users = require('./routes/users')(passport);
 var jobs = require('./routes/jobs')(passport);
@@ -61,4 +66,4 @@ if (app.get('env') === 'development') {
 }
 
 module.exports = app;
-console.log("Server running on port 3000");
+console.log("No errors, yay! Server running on port 3000");

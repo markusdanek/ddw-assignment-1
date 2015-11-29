@@ -1,1 +1,10 @@
-<a href="/login" class="text-center new-account">Login</a>
+<div class="container">
+  <h1>wassup, im the index fam</h1>
+  <br/><br/><br/>
+  {{#if login}}
+    you are already logged in
+    <a href="/app/signout" class="text-center new-account">Log out</a>
+  {{else}}
+    <a href="/app/login" class="text-center new-account">Login</a>
+  {{/if}}
+</div>
