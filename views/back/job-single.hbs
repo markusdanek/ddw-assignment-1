@@ -1,18 +1,24 @@
 <div class="container">
-	<h1>Job View:</h1>
-	<form class='form-signin' action='/app/jobs/{{ job._id }}' method='POST'>
-		<input type='text' name='name' value="{{job.name}}" class='form-control' placeholder='name' required, autofocus>
-		<input type='text' name='email' value="{{job.email}}" class='form-control' placeholder='email' required>
-		<input type='text' name='number' value="{{job.number}}" class='form-control' placeholder='number' required>
-		{{#if create}}
-		<button class='btn btn-lg btn-primary btn-block' type='submit'>Create Job</button>
-		{{/if}}
-		{{#if edit}}
-		<button class='btn btn-lg btn-primary btn-block' type='submit'>Edit Job</button>
-	</form>
-		<a href="/app/jobs/{{ job._id }}/delete"><button class='btn btn-lg btn-primary btn-block'>Delete Job</button></a>
-		{{/if}}
-	{{#if message}}
-		{{message}}
-	{{/if}}
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<h1>Job View:</h1>
+			<form class='form-signin' action='/app/jobs/{{ job._id }}' method='POST'>
+				<input type='text' name='name' value="{{job.name}}" class='form-control' placeholder='Name' required, autofocus>
+				<input type='text' name='email' value="{{job.email}}" class='form-control' placeholder='E-Mail' required>
+				<input type='text' name='salary' value="{{job.salary}}" class='form-control' placeholder='Salary' required>
+				<input type='text' name='place' value="{{job.place}}" class='form-control' placeholder='Place' required>
+				{{#if create}}
+					<button class='btn btn-lg btn-primary btn-block' type='submit'>Create Job</button>
+				{{/if}}
+				{{#if edit}}
+					<button class='btn btn-lg btn-primary btn-block' type='submit'>Edit Job</button>
+				</form>
+				<a href="/app/jobs/{{ job._id }}/delete"><button class='btn btn-lg btn-primary col-sm-4 col-sm-offset-4'>Delete Job</button></a>
+				{{/if}}
+				<br/><br/><br/><a href="/app/jobs/" class="btn btn-default">Back to Job List</a>
+			{{#if message}}
+				{{message}}
+			{{/if}}
+		</div>
+	</div>
 </div>

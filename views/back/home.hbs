@@ -1,6 +1,24 @@
-<div class="container">
-	<h1>You're home, baby</h1>
-	<a href="/app/jobs">Job Page</a><br/>
-	<a href="/app/users">Users Page</a><br/><br/>
-	<a href="/app/signout" class="text-center new-account">Sign Out</a>
+<div class="home container">
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<h2>Welcome home, {{user.firstName}}</h2>
+      <div class="row">
+        <div class="col-lg-4">
+          <h3>Job Page</h3>
+          <p>List all, add, update and<br/>delete jobs</p>
+          <p><a class="btn btn-primary" href="/app/jobs" role="button">Job Page &raquo;</a></p>
+        </div>
+        <div class="col-lg-4">
+          <h3>User Page</h3>
+          <p>List all, add, update and delete users</p>
+          <p><a class="btn btn-primary" href="/app/users" role="button">User Page &raquo;</a></p>
+       </div>
+        <div class="col-lg-4">
+          <h3>Signout</h3>
+          <p>bro...<br/>what else should I explain?</p>
+          <p><a class="btn btn-danger" href="/app/signout" role="button">Signout &raquo;</a></p>
+        </div>
+      </div>
+		</div>
+	</div>
 </div>

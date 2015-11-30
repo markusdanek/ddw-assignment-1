@@ -4,6 +4,7 @@ var mongojs = require('mongojs');
 module.exports = mongoose.model('jobs',{
 	name: String,
 	email: String,
-	number: String,
+	salary: String,
+	place: String,
 	formFieldsId: mongoose.Schema.Types.ObjectId
 });

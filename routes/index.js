@@ -20,6 +20,7 @@ module.exports = function(passport){
 	/* [GET] Home Page */
 	router.get('/app/home', connectEnsureLogin.ensureLoggedIn(), function(req, res){
 		res.render('back/home', {title : 'Home', user: req.user });
+		// res.redirect('/app');
 	});
 
 	router.get('/jobs', function (req, res) {

@@ -1,5 +1,6 @@
 var express = require('express');
 var User = require('../models/user');
+var MongoDB = require('mongojs');
 var connectEnsureLogin = require("connect-ensure-login");
 var router = express.Router();
 
@@ -12,6 +13,36 @@ module.exports = function(passport){
 	    res.render('back/users', {title : 'Users', User : User});
 	  });
 	});
+
+	// [GET] List single user
+  router.get('/users/:id', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
+    var id = req.params.id;
+    User.findOne({_id: MongoDB.ObjectId(id)}, function (err, User) {
+      if (err) return res.send(500, { error: err });
+      else res.render('back/user-single', {title : 'Users Single', User : User, edit: true});
+    });
+  });
+
+	// [POST] Edit single user
+  router.post('/users/:id', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
+    var id = req.params.id;
+    User.findOneAndUpdate(
+      {_id: MongoDB.ObjectId(id)},
+      {name: req.body.username, email: req.body.email, password: req.body.password, firstName: req.body.firstName, lastName: req.body.lastName},
+      {upsert:true}, function(err, doc){
+        if (err) return res.send(500, { error: err });
+        return res.redirect('/app/users/'+id);
+    });
+  });
+
+	// [GET] Delete user
+  router.get('/users/:id/delete', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
+    var id = req.params.id;
+    User.remove({_id: MongoDB.ObjectId(id)}, function (err, doc) {
+      if (err) return res.send(500, { error: err });
+      else { res.redirect('/app/users/'); }
+    });
+  });
 
 	// [GET] Login Page
 	router.get('/login', function(req, res){

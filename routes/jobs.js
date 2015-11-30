@@ -10,7 +10,7 @@ module.exports = function(){
   router.get('/jobs', connectEnsureLogin.ensureLoggedIn(),  function (req, res) {
     Job.find(function (err, jobs) {
       if (err) return res.send(500, { error: err });
-      else res.render('back/jobs', {title : 'Users', Jobs : jobs});
+      else res.render('back/jobs', {title : 'Jobs', Jobs : jobs});
     });
   });
 
@@ -21,7 +21,7 @@ module.exports = function(){
 
   // [POST] Insert new job
   router.post('/jobs/', connectEnsureLogin.ensureLoggedIn(), function (req, res) {
-    var newJob = new Job( {name: req.body.name, email: req.body.email, number: req.body.number} );
+    var newJob = new Job( {name: req.body.name, email: req.body.email, salary: req.body.salary, place: req.body.place} );
     newJob.save( function (err, data) {
       if (err) return res.send(500, { error: err });
       else { res.redirect('/app/jobs/'); }
@@ -43,7 +43,7 @@ module.exports = function(){
     var id = req.params.id;
     Job.findOne({_id: MongoDB.ObjectId(id)}, function (err, jobs) {
       if (err) return res.send(500, { error: err });
-      else res.render('back/job-single', {title : 'Users', job : jobs, edit: true});
+      else res.render('back/job-single', {title : 'Job Single', job : jobs, edit: true});
     });
   });
 
@@ -52,7 +52,7 @@ module.exports = function(){
     var id = req.params.id;
     Job.findOneAndUpdate(
       {_id: MongoDB.ObjectId(id)},
-      {name: req.body.name, email: req.body.email, number: req.body.number},
+      {name: req.body.name, email: req.body.email, salary: req.body.salary, place: req.body.place},
       {upsert:true}, function(err, doc){
         if (err) return res.send(500, { error: err });
         return res.redirect('/app/jobs/'+id);
