@@ -19,7 +19,7 @@ module.exports = function(passport){
     var id = req.params.id;
     User.findOne({_id: MongoDB.ObjectId(id)}, function (err, User) {
       if (err) return res.send(500, { error: err });
-      else res.render('back/user-single', {title : 'Users Single', User : User, edit: true});
+      else res.render('back/user-single', {title : 'Users Single', user : User, edit: true});
     });
   });
 
