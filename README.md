@@ -1,5 +1,5 @@
 Steps to run the app
 ==============
-* **$ mongod**
+* **npm install -g nodemon**
 * **npm install**
 * **npm start**
