@@ -1,4 +1,8 @@
-var express = require('express');
+(function(
+	express
+) {
+
+//TODO: move to function injection
 var User = require('../models/user');
 var MongoDB = require('mongojs');
 var connectEnsureLogin = require("connect-ensure-login");
@@ -78,3 +82,6 @@ module.exports = function(passport){
 
 	return router;
 };
+}(
+	require('express')
+));

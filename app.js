@@ -1,3 +1,5 @@
+/* @flow */ 
+console.log(process.env.DB_USER);
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -43,7 +45,7 @@ app.use(function (req, res, next) {
 });
 
 var index = require('./routes/index')(passport);
-var users = require('./routes/users')(passport);
+var users = require('./routes/users')(passport, app);
 var jobs = require('./routes/jobs')(passport);
 app.use('/', index);
 app.use('/app', users);
